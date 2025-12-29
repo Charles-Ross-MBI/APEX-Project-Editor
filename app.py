@@ -55,51 +55,51 @@ if st.session_state["guid"]:
         None
     )
 
-# ---------------------------------------------------------
-# Build RETURN Button HTML (always top-left)
-# ---------------------------------------------------------
-version = st.session_state["version"]
+# # ---------------------------------------------------------
+# # Build RETURN Button HTML (always top-left)
+# # ---------------------------------------------------------
+# version = st.session_state["version"]
 
-if version == "review":
-    return_url = (
-        "https://experience.arcgis.com/experience/"
-        "e84a0f4117d1452396f407c080336f01/page/REVIEW-PROJECTS"
-    )
-    return_button = "RETURN TO REVIEW LIST"
-else:
-    return_url = (
-        "https://experience.arcgis.com/experience/"
-        "e84a0f4117d1452396f407c080336f01"
-    )
-    return_button = "RETURN TO APEX"
+# if version == "review":
+#     return_url = (
+#         "https://experience.arcgis.com/experience/"
+#         "e84a0f4117d1452396f407c080336f01/page/REVIEW-PROJECTS"
+#     )
+#     return_button = "RETURN TO REVIEW LIST"
+# else:
+#     return_url = (
+#         "https://experience.arcgis.com/experience/"
+#         "e84a0f4117d1452396f407c080336f01"
+#     )
+#     return_button = "RETURN TO APEX"
 
-st.markdown(
-    f"""
-    <a href="{return_url}"
-       onclick="window.top.location.replace('{return_url}'); return false;"
-       style="display: inline-block;
-              padding: 0.4rem 0.8rem;
-              background-color: #e0e0e0;
-              color: black;
-              text-decoration: none;
-              border-radius: 5px;
-              font-weight: 600;">
-        {return_button}
-    </a>
-    """,
-    unsafe_allow_html=True
-)
+# st.markdown(
+#     f"""
+#     <a href="{return_url}"
+#        onclick="window.top.location.replace('{return_url}'); return false;"
+#        style="display: inline-block;
+#               padding: 0.4rem 0.8rem;
+#               background-color: #e0e0e0;
+#               color: black;
+#               text-decoration: none;
+#               border-radius: 5px;
+#               font-weight: 600;">
+#         {return_button}
+#     </a>
+#     """,
+#     unsafe_allow_html=True
+# )
 
 
 
-st.write("")  # small spacing under button
+# st.write("")  # small spacing under button
 
 # ---------------------------------------------------------
 # Project Selection or Project Name
 # ---------------------------------------------------------
 if not st.session_state["guid"]:
     # Title above dropdown
-    #st.markdown("<h5>Select an APEX Project</h5>", unsafe_allow_html=True)
+    st.markdown("<h4>Select an APEX Project</h4>", unsafe_allow_html=True)
 
     # Dropdown
     selected_label = st.selectbox(
@@ -119,7 +119,7 @@ if not st.session_state["guid"]:
 else:
     # Project selected → show name under the return button
     if current_label:
-        st.markdown(f"<h5>{current_label}</h5>", unsafe_allow_html=True)
+        st.markdown(f"<h4>{current_label}</h4>", unsafe_allow_html=True)
     else:
         st.warning("Selected GUID not found in project list.")
 
