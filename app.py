@@ -2,11 +2,6 @@ import streamlit as st
 from agol_util import get_multiple_fields
 
 # ---------------------------------------------------------
-# Page Configuration
-# ---------------------------------------------------------
-st.set_page_config(layout="wide")
-
-# ---------------------------------------------------------
 # Read URL Query Parameters
 # ---------------------------------------------------------
 params = st.query_params
@@ -22,48 +17,6 @@ if "guid" not in st.session_state:
 
 if "version" not in st.session_state:
     st.session_state["version"] = version_param if version_param else "edit"
-
-# ---------------------------------------------------------
-# Title Row (Title on left, RETURN button on right)
-# ---------------------------------------------------------
-col_title, col_return = st.columns([6, 1])
-
-with col_title:
-    st.title("APEX PROJECT EDITOR")
-
-with col_return:
-    version = st.session_state["version"]
-
-    if version == "review":
-        return_url = (
-            "https://experience.arcgis.com/experience/"
-            "e84a0f4117d1452396f407c080336f01/page/REVIEW-PROJECTS"
-        )
-        return_button = "RETURN TO REVIEW LIST"
-    else:
-        return_url = (
-            "https://experience.arcgis.com/experience/"
-            "e84a0f4117d1452396f407c080336f01"
-        )
-        return_button = "RETURN TO APEX"
-
-    st.markdown(
-        f"""
-        <a href="{return_url}" target="_self"
-           style="display: inline-block;
-                  padding: 0.5rem 1rem;
-                  background-color: #e0e0e0;
-                  color: black;
-                  text-decoration: none;
-                  border-radius: 5px;
-                  text-align: center;
-                  font-weight: 600;
-                  margin-top: 1.2rem;">
-            {return_button}
-        </a>
-        """,
-        unsafe_allow_html=True
-    )
 
 # ---------------------------------------------------------
 # Load Project List
@@ -88,38 +41,84 @@ label_to_gid = {
 }
 
 labels = sorted(label_to_gid.keys())
-
 placeholder = "— Select a project —"
 labels_with_placeholder = [placeholder] + labels
 
 # ---------------------------------------------------------
-# Determine Dropdown Index (URL param takes priority)
+# Determine Current Project Label (if GUID exists)
 # ---------------------------------------------------------
+current_label = None
 if st.session_state["guid"]:
-    # Find label matching the GUID
     current_label = next(
         (label for label, gid in label_to_gid.items()
          if gid == st.session_state["guid"]),
-        placeholder
+        None
     )
-    index = labels_with_placeholder.index(current_label)
-else:
-    index = 0
 
 # ---------------------------------------------------------
-# Project Selection Dropdown
+# Build RETURN Button HTML (always top-left)
 # ---------------------------------------------------------
-selected_label = st.selectbox(
-    "Select a Project",
-    labels_with_placeholder,
-    index=index
+version = st.session_state["version"]
+
+if version == "review":
+    return_url = (
+        "https://experience.arcgis.com/experience/"
+        "e84a0f4117d1452396f407c080336f01/page/REVIEW-PROJECTS"
+    )
+    return_button = "RETURN TO REVIEW LIST"
+else:
+    return_url = (
+        "https://experience.arcgis.com/experience/"
+        "e84a0f4117d1452396f407c080336f01"
+    )
+    return_button = "RETURN TO APEX"
+
+st.markdown(
+    f"""
+    <a href="{return_url}" target="_self"
+       style="display: inline-block;
+              padding: 0.4rem 0.8rem;
+              background-color: #e0e0e0;
+              color: black;
+              text-decoration: none;
+              border-radius: 5px;
+              font-weight: 600;">
+        {return_button}
+    </a>
+    """,
+    unsafe_allow_html=True
 )
 
-# Update session state when user selects a project
-if selected_label == placeholder:
-    st.session_state["guid"] = None
+st.write("")  # small spacing under button
+
+# ---------------------------------------------------------
+# Project Selection or Project Name
+# ---------------------------------------------------------
+if not st.session_state["guid"]:
+    # Title above dropdown
+    #st.markdown("<h5>Select an APEX Project</h5>", unsafe_allow_html=True)
+
+    # Dropdown
+    selected_label = st.selectbox(
+        "Select a project",
+        labels_with_placeholder,
+        index=0
+    )
+
+    # Update selection
+    if selected_label != placeholder:
+        st.session_state["guid"] = label_to_gid[selected_label]
+        st.rerun()
+
+    # Info message stays directly below the dropdown
+    st.info("Select an APEX project to view and edit project information.")
+
 else:
-    st.session_state["guid"] = label_to_gid[selected_label]
+    # Project selected → show name under the return button
+    if current_label:
+        st.markdown(f"<h5>{current_label}</h5>", unsafe_allow_html=True)
+    else:
+        st.warning("Selected GUID not found in project list.")
 
 # ---------------------------------------------------------
 # Display Tabs When GUID Is Selected
@@ -130,7 +129,7 @@ if st.session_state["guid"]:
         "GEOMETRY",
         "GEOGRAPHY",
         "ROUTES",
-        "IMPACTED COMMUNITIES",
+        "COMMUNITIES",
         "CONTACTS",
         "WEB LINKS & ATTACHMENTS"
     ])
@@ -155,6 +154,3 @@ if st.session_state["guid"]:
 
     with links:
         st.write("Content")
-
-else:
-    st.info("Select a Project to View and Edit Project Information")
