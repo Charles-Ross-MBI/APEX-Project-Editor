@@ -75,7 +75,8 @@ else:
 
 st.markdown(
     f"""
-    <a href="{return_url}" target="_top"
+    <a href="{return_url}" 
+       onclick="window.top.location.href='{return_url}'; return false;"
        style="display: inline-block;
               padding: 0.4rem 0.8rem;
               background-color: #e0e0e0;
@@ -88,6 +89,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 st.write("")  # small spacing under button
 
