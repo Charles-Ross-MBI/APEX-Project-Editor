@@ -75,7 +75,7 @@ else:
 
 st.markdown(
     f"""
-    <a href="{return_url}" target="_self"
+    <a href="{return_url}" target="_top"
        style="display: inline-block;
               padding: 0.4rem 0.8rem;
               background-color: #e0e0e0;
