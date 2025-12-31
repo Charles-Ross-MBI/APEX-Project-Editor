@@ -1,56 +1,41 @@
 import streamlit as st
 
 TAB_INSTRUCTIONS = {
-    "APEX Instructions": """
-### How to Use the APEX Project Editor
+    "Information": """
+#### How to Use
 
-#### 1. Select a Project
-Use the **dropdown list at the top of the page** to select an APEX project.  
-The list contains all available projects from the APEX database.
-
-- If no project is selected, the editor will remain inactive.
-- Once a project is selected, the full set of tabs will appear.
+This page displays a set of cards, each representing a specific section of data for the selected project.  
+Each card shows the current values stored in AGOL, and you can edit those values directly inside the card.
 
 ---
 
-#### 2. Navigate Through the Tabs
-After selecting a project, you will see several tabs such as:
+**1. View and edit values inside each card**
 
-- **INFORMATION**  
-- **GEOMETRY**  
-- **GEOGRAPHY**  
-- **ROUTES**  
-- **IMPACTED COMMUNITIES**  
-- **CONTACTS**  
-- **WEB LINKS & ATTACHMENTS**
-
-Each tab displays a different section of the project’s data.  
-You can move between tabs at any time to review or update information.
+Every card corresponds to a defined section of project data.  
+When you expand a card, all fields for that section are immediately visible and editable.  
+You can update any value directly in the card.
 
 ---
 
-#### 3. Update Project Data
-Inside each tab, you may:
+**2. Save your changes**
 
-- View existing project details  
-- Edit fields  
-- Add or remove information  
-- Upload or modify geometry  
-- Update contacts, routes, or related links  
-
-Any changes you make will be saved back to the **APEX Database** when you submit or save within that tab.
+After making updates, press **UPDATE** at the bottom of the card.  
+If the update to AGOL is successful, a **green checkmark** will appear next to the button.  
+If the update fails, an **error message** will appear explaining the reason.
 
 ---
 
-#### 4. Review Your Updates
-Before leaving the editor, review each tab to ensure your updates are complete and accurate.  
-Your changes will be stored directly in the APEX DB and reflected in downstream applications.
+**3. Continue working across sections**
 
----
-
-If you need to switch to a different project, simply return to the dropdown and select another one.
+You may move between cards to review or update additional sections.  
+To switch to another project, simply choose a different one from the dropdown.
 """
 }
+
+
+
+
+
 
 def instructions(section):
     """
