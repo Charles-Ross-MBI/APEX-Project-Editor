@@ -1,6 +1,6 @@
 import os
 import streamlit as st
-from dotenv import load_dotenv
+
 
 
 def init_session_state():
@@ -79,6 +79,7 @@ def init_session_state():
     env_pass = None
 
     if env_file_exists:
+        from dotenv import load_dotenv
         load_dotenv()
         agol_username = os.getenv("AGOL_USERNAME")
         agol_password = os.getenv("AGOL_PASSWORD")
