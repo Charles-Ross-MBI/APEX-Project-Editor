@@ -82,31 +82,16 @@ if st.session_state["guid"]:
 # ---------------------------------------------------------
 version = st.session_state.get("version")
 
-# Determine button label
 if version == "review":
     return_button = "RETURN TO REVIEW LIST"
 else:
     return_button = "RETURN TO APEX"
 
-# Experience Builder fallback URL
-experience_builder_url = (
-    "https://experience.arcgis.com/experience/"
-    "e84a0f4117d1452396f407c080336f01"
-)
-
-# Render the button
 if version is not None:
     st.markdown(
         f"""
         <a href="#"
-           onclick="
-               if (window.parent.history.length > 1) {{
-                   window.parent.history.back();
-               }} else {{
-                   window.parent.location.href = '{experience_builder_url}';
-               }}
-               return false;
-           "
+           onclick="window.top.history.back(); return false;"
            style="
                display: inline-block;
                padding: 0.4rem 0.8rem;
@@ -123,6 +108,7 @@ if version is not None:
     )
 
     st.write("")  # small spacing under button
+
 
 
 
