@@ -76,45 +76,6 @@ if st.session_state["guid"]:
 
 
 
-
-# ---------------------------------------------------------
-# Build RETURN Button HTML (always top-left)
-# ---------------------------------------------------------
-version = st.session_state.get("version")
-
-if version == "review":
-    return_button = "RETURN TO REVIEW LIST"
-else:
-    return_button = "RETURN TO APEX"
-
-if version is not None:
-    st.markdown(
-        f"""
-        <a href="#"
-           onclick="window.top.history.back(); return false;"
-           style="
-               display: inline-block;
-               padding: 0.4rem 0.8rem;
-               background-color: #e0e0e0;
-               color: black;
-               text-decoration: none;
-               border-radius: 5px;
-               font-weight: 600;
-           ">
-            {return_button}
-        </a>
-        """,
-        unsafe_allow_html=True
-    )
-
-    st.write("")  # small spacing under button
-
-
-
-
-
-
-
 # ---------------------------------------------------------
 # Project Selection or Project Name
 # ---------------------------------------------------------
