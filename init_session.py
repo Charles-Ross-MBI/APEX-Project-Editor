@@ -28,7 +28,8 @@ def init_session_state():
         'construction_years': ["CY2025", "CY2026", "CY2027", "CY2028", "CY2029", "CY2030"],
         'phase': ["Planning", "Construction"],
         'funding': ["FHWY", "FHWA", "FAA", "STATE", "OTHER"],
-        'practice': ['Highways', "Aviation", "Facilities", "Marine Highway", "Other"]
+        'practice': ['Highways', "Aviation", "Facilities", "Marine Highway", "Other"],
+        'fiscal_year': ["2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030"]
     }
     for key, value in value_lists.items():
         st.session_state.setdefault(key, value)

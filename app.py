@@ -11,13 +11,10 @@ from instructions import instructions
 init_session_state()
 
 
-
 # ---------------------------------------------------------
 # Set Configuration
 # --------------------------------------------------------- 
 st.set_page_config(layout=st.session_state['mode'])
-
-
 
 
 # ---------------------------------------------------------
@@ -114,14 +111,15 @@ else:
 # Display Tabs When GUID Is Selected
 # ---------------------------------------------------------
 if st.session_state["guid"]:
-    info, geom, geography, routes, comm, contacts, links = st.tabs([
+
+    info, geom, geography, routes, comm, contacts, status_deploy = st.tabs([
         "INFORMATION",
         "GEOMETRY",
         "GEOGRAPHY",
         "ROUTES",
         "COMMUNITIES",
         "CONTACTS",
-        "WEB LINKS & ATTACHMENTS"
+        "STATUS & DEPLOYMENT"
     ])
 
 
@@ -154,5 +152,5 @@ if st.session_state["guid"]:
     with contacts:
         st.write("Content")
 
-    with links:
+    with status_deploy:
         st.write("Content")

@@ -29,9 +29,39 @@ If the update fails, an **error message** will appear explaining the reason.
 
 You may move between cards to review or update additional sections.  
 To switch to another project, simply choose a different one from the dropdown.
+""",
+
+    "AASHTOWare": """
+#### How to Use
+
+This tab displays the fields that are connected to the AASHTOWare database for this project.  
+These values may be updated automatically when the live AASHTOWare connection is enabled.
+
+---
+
+**1. Control the live AASHTOWare connection**
+
+At the top of this tab, you will find a toggle switch that controls the **live connection** to AASHTOWare.
+
+- When **live updates are ON**, AASHTOWare will automatically push updates into the fields shown on this tab.  
+- When **live updates are OFF**, automatic updates from AASHTOWare will stop, and the values will remain unchanged until manually edited.
+
+---
+
+**2. Manually update AASHTOWare-linked fields**
+
+You may manually update any of the AASHTOWare-linked fields at any time.  
+Simply make your changes in the card and press **UPDATE**.  
+Your edits will be saved directly to AGOL for this project.
+
+---
+
+**3. Use AASHTOWare data alongside other project sections**
+
+You can move between the AASHTOWare tab and other project sections at any time.  
+Turning the live connection on or off does not affect your ability to edit other project data.
 """
 }
-
 
 
 
